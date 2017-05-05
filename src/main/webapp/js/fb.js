@@ -10,13 +10,6 @@
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
       testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Login with Facebook ';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Login with Facebook ';
     }
   }
 
@@ -82,8 +75,22 @@
   function testAPI() { 
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me?fields=id,first_name,last_name,birthday,email', function(response) {
-      console.log('Successful login for: ' + response.id + ' '+ response.first_name + ' ' + response.last_name + ' ' + response.birthday + ' '+ response.email);  
-         
-      //document.getElementById("status").innerHTML = '<p>Welcome '+response.name+'! <a href=fblogincontroller.jsp?user_name='+ response.name.replace(" ", "_") +'&user_email='+ response.email +'>Continue with facebook login</a></p>'
+      console.log('Successful login for: ' + response.id + ' '+ response.first_name + ' ' + response.last_name + ' ' + response.birthday + ' '+ response.email);
+      var id= response.id;
+      var apellidos =(response.last_name).split(" ");
+      
+      $.ajax({
+			type:'POST',
+			data: {id: id,nombre:response.first_name,fNacimiento:response.birthday,email:response.email,pApellido:apellidos[0],sApellido:apellidos[1], tipoFuncion:"RegistrarProfesor"},
+			url:'controlVista',
+			success: function(resultado){
+				if(resultado!=null){
+					window.location = ("homeAdmi.html"); 
+				}
+				else{
+					alert("NO entra a la funcion"); 
+				}
+			}
+		});
     });
   }  
