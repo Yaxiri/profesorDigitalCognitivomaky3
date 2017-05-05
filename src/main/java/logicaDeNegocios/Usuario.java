@@ -1,41 +1,29 @@
 package logicaDeNegocios;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.ArrayList;
 
-public class Usuario implements Serializable{
-	private int id;
-	private int carnet;
-	private Date fechaNacimiento;
-	private String primerApellido;
-	private String segundoApellido;
-	private String nombre;
-	private String correo;
-	private String contrasena;
+public abstract class Usuario implements Serializable{
+	protected String id;
+	protected String fechaNacimiento;
+	protected String primerApellido;
+	protected String segundoApellido;
+	protected String nombre;
+	protected String correo;
+	protected String password;
+	protected ArrayList<Curso> cursos=new ArrayList<>();
 	
-	
-	public String getContrasena() {
-		return contrasena;
-	}
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public int getCarnet() {
-		return carnet;
-	}
-	public void setCarnet(int carnet) {
-		this.carnet = carnet;
-	}
-	public Date getFechaNacimiento() {
+	
+	public String getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 	public String getPrimerApellido() {
@@ -62,15 +50,17 @@ public class Usuario implements Serializable{
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
-	public Usuario(int id, int carnet, String primerApellido, String segundoApellido, String nombre, String correo,String password){
-		setId(id);
-		setCarnet(carnet);
-		setPrimerApellido(primerApellido);
-		setSegundoApellido(segundoApellido);
-		setNombre(nombre);
-		setCorreo(correo);
-		setContrasena(password);
+	public ArrayList<Curso> getCursos() {
+		return cursos;
+	}
+	public void setCursos(Curso curso) {
+		cursos.add(curso);
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
